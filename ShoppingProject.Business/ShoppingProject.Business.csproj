@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ShoppingProject.Data\ShoppingProject.Data.csproj" />
+    <ProjectReference Include="..\ShoppingProject.Logger\ShoppingProject.Logger.csproj" />
+  </ItemGroup>
+
+</Project>
