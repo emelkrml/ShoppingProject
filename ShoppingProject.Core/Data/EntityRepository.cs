@@ -110,7 +110,7 @@ namespace ShoppingProject.Core.Data
             try
             {
                 context.Set<T>().Update(entity);
-                return new SuccessResult(Messages.ProductNotUpdated);
+                return new SuccessResult(Messages.ProductUpdated);
             }
             catch (Exception ex)
             {
