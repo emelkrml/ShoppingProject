@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShoppingProject.Business.Abstract;
 using ShoppingProject.Entity.Data;
+using ShoppingProject.Entity.Logger;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,8 +47,11 @@ namespace ShoppingProject.WebAPI.Controllers
 
 
         [HttpPut("{productId}/{selectedProduct}")]
+        // selectedProduct: seçilen ürün miktarı
         public IActionResult Put(int productId, short selectedProduct)
         {
+            GeneralLog generallog = new GeneralLog();
+
             var getResult = database.Product.GetByID(productId);
 
             if (getResult.Success && getResult.Data != null)
@@ -56,8 +60,25 @@ namespace ShoppingProject.WebAPI.Controllers
                 getResult.Data.UnitsInStock = (short)stock;
                 var updateResult = database.Product.Update(getResult.Data);
                 database.SaveChanges();
+
+                log.GeneralLog.Add(new GeneralLog
+                {
+                    Date = DateTime.Now,
+                    LogInfo = "[Cart/productId/selectedProduct] " + productId.ToString() + " ürünün stoğundan " + selectedProduct.ToString() + " tane ürün düşüldü.",
+                    LogName = "INFO"
+                });
+
                 return Ok(updateResult.Message);
             }
+
+            log.GeneralLog.Add(new GeneralLog
+            {
+                Date = DateTime.Now,
+                LogInfo = "[Cart/productId/selectedProduct] getResult success dönmedi",
+                LogName = "ERROR"
+            });
+
+            generallog.Date = DateTime.Now;
 
             return BadRequest(getResult.Message);
         }
