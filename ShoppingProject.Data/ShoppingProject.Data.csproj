@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ShoppingProject.Core\ShoppingProject.Core.csproj" />
     <ProjectReference Include="..\ShoppingProject.Entity\ShoppingProject.Entity.csproj" />
   </ItemGroup>
 

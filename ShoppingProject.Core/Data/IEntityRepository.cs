@@ -1,4 +1,5 @@
 ﻿using ShoppingProject.Core.Entity;
+using ShoppingProject.Core.Utilities.Result.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,20 +12,20 @@ namespace ShoppingProject.Core.Data
     public interface IEntityRepository<T>
         where T : class, IEntity, new()
     {
-		T Get(Expression<Func<T, bool>> filter);
+		IDataResult<T> Get(Expression<Func<T, bool>> filter);
 
-		T GetByID(int ID);
+		IDataResult<T> GetByID(int ID);
 
-		IQueryable<T> GetAll();
+		IDataResult<IQueryable<T>> GetAll();
 
-		IQueryable<T> GetList(Expression<Func<T, bool>> filter);
+		IDataResult<IQueryable<T>> GetList(Expression<Func<T, bool>> filter);
 
-		void Add(T entity);
+		IResult Add(T entity);
 
-		void Update(T entity);
+		IResult Update(T entity);
 
-		void Delete(T entity);
+		IResult Delete(T entity);
 
-		void SaveChanges();
+		IResult SaveChanges();
 	}
 }

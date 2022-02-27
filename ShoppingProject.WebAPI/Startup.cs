@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using ShoppingProject.Business.Abstract;
+using ShoppingProject.Business.Concrete;
 using ShoppingProject.Data;
 using ShoppingProject.Data.Context;
 using System;
@@ -29,8 +31,12 @@ namespace ShoppingProject.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ShoppingContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("ShoppingConnection")));
+            //services.AddDbContext<ShoppingContext>(options =>
+            //    options.UseSqlServer(Configuration.GetConnectionString("ShoppingConnection")));
+
+            services.AddScoped<IDatabaseBUsiness, DatabaseBusiness>();
+            services.AddScoped<ILogBusinesss, LogBusiness>();
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -46,7 +52,7 @@ namespace ShoppingProject.WebAPI
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ShoppingProject.WebAPI v1"));
-                ShoppingSeed.AddData(app);
+                //ShoppingSeed.AddData(app);
             }
 
             app.UseHttpsRedirection();
