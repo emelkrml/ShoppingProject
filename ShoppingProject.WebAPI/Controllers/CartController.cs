@@ -24,27 +24,6 @@ namespace ShoppingProject.WebAPI.Controllers
             log = _log;
         }
 
-        // GET: api/<CartController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<CartController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<CartController>
-        [HttpPost]
-        public void Post(int productId)
-        {
-
-        }
-
 
         [HttpPut("{productId}/{selectedProduct}")]
         // selectedProduct: seçilen ürün miktarı
@@ -82,11 +61,6 @@ namespace ShoppingProject.WebAPI.Controllers
 
             return BadRequest(getResult.Message);
         }
-
-        // DELETE api/<CartController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        
     }
 }
